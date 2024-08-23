@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Card Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: left;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input[type="text"], input[type="file"] {
+            width: calc(100% - 10px);
+            padding: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <form action="/generate-id" method="POST" enctype="multipart/form-data">
+        <h2>ID Card Generator</h2>
+        <label for="companyLogo">Company Logo:</label>
+        <input type="file" id="companyLogo" name="companyLogo" accept="image/*" required>
+
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" name="companyName" required>
+
+        <label for="userPhoto">User Photo:</label>
+        <input type="file" id="userPhoto" name="userPhoto" accept="image/*" required>
+
+        <label for="userName">User Name:</label>
+        <input type="text" id="userName" name="userName" required>
+
+        <label for="idNumber">ID Number:</label>
+        <input type="text" id="idNumber" name="idNumber" required>
+
+        <label for="contact">Contact Information:</label>
+        <input type="text" id="contact" name="contact" required>
+
+        <button type="submit">Generate ID Card</button>
+    </form>
+</body>
+</html>

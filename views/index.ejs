@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity Card Generator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #d0e9f4, #e4f1f5);
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .identity-card {
+            width: 320px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border: 1px solid #ddd;
+            background: linear-gradient(180deg, #fefefe, #e6e6e6);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        .company-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #007bff;
+        }
+
+        .card-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .card-photo img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #007bff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .card-info p {
+            margin: 12px 0;
+            font-size: 16px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .card-info strong {
+            color: #007bff;
+        }
+
+        .card-info span {
+            font-weight: 500;
+        }
+
+        #download-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #download-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-container">
+        <div class="identity-card" id="identity-card">
+            <div class="card-header">
+                <img src="<%= companyLogo %>" alt="Company Logo" class="company-logo">
+                <h1><%= companyName %></h1>
+            </div>
+            <div class="card-photo">
+                <img src="<%= userPhoto %>" alt="Profile Photo">
+            </div>
+            <div class="card-info">
+                <p><strong>Name:</strong> <span><%= userName %></span></p>
+                <p><strong>ID Number:</strong> <span><%= idNumber %></span></p>
+                <p><strong>Contact:</strong> <span><%= contact %></span></p>
+            </div>
+        </div>
+        <button id="download-btn">Download ID Card</button>
+    </div>
+
+    <!-- Load the latest version of html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function() {
+            html2canvas(document.getElementById('identity-card')).then(canvas => {
+                let link = document.createElement('a');
+                link.download = 'id-card.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            }).catch(err => {
+                console.error('Error capturing ID card:', err);
+            });
+        });
+    </script>
+</body>
+
+</html>

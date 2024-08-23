@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity Card Generator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #c2e9fb, #a1c4fd);
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .identity-card {
+            width: 340px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border: 1px solid #ddd;
+            background: linear-gradient(180deg, #f8f9fa, #ffffff);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .identity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(0, 123, 255, 0.1), transparent);
+            border-radius: 12px;
+            z-index: 0;
+        }
+
+        .card-header {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .company-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 4px solid #007bff;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #007bff;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .card-photo img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #007bff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-info {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-info p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+            line-height: 1.6;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-info strong {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        .card-info span {
+            font-weight: 400;
+        }
+
+        #download-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        #download-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-container">
+        <div class="identity-card" id="identity-card">
+            <div class="card-header">
+                <img src="<%= companyLogo %>" alt="Company Logo" class="company-logo">
+                <h1><%= companyName %></h1>
+            </div>
+            <div class="card-photo">
+                <img src="<%= userPhoto %>" alt="Profile Photo">
+            </div>
+            <div class="card-info">
+                <p><strong>Name:</strong> <span><%= userName %></span></p>
+                <p><strong>ID Number:</strong> <span><%= idNumber %></span></p>
+                <p><strong>Contact:</strong> <span><%= contact %></span></p>
+            </div>
+        </div>
+        <button id="download-btn">Download ID Card</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function() {
+            html2canvas(document.getElementById('identity-card')).then(function(canvas) {
+                let link = document.createElement('a');
+                link.download = 'id-card.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(function(err) {
+                console.error('Error capturing ID card:', err);
+            });
+        });
+    </script>
+</body>
+
+</html>
